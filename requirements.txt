@@ -3,7 +3,7 @@ alabaster==0.7.12
 # anaconda-project==0.8.3
 appdirs==1.4.4
 argh==0.26.2
-astropy==4.0.2
+# astropy==4.0.2
 async-generator==1.10
 atomicwrites==1.4.0
 backcall==0.2.0
