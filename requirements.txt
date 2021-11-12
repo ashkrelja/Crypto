@@ -43,22 +43,22 @@ json5==0.9.5
 # jupyter==1.0.0
 # jupyter-core==4.6.3
 # jupyterlab==2.2.6
-lazy-object-proxy==1.4.3
-libarchive-c==2.9
-llvmlite==0.34.0
-locket==0.2.0
-MarkupSafe==1.1.1
-mccabe==0.6.1
-menuinst==1.4.16
-mistune==0.8.4
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
-mock==4.0.2
-mpmath==1.1.0
-msgpack==1.0.0
-multipledispatch==0.6.0
-nose==1.3.7
+# lazy-object-proxy==1.4.3
+# libarchive-c==2.9
+# llvmlite==0.34.0
+# locket==0.2.0
+# MarkupSafe==1.1.1
+# mccabe==0.6.1
+# menuinst==1.4.16
+# mistune==0.8.4
+# mkl-fft==1.2.0
+# mkl-random==1.1.1
+# mkl-service==2.3.0
+# mock==4.0.2
+# mpmath==1.1.0
+# msgpack==1.0.0
+# multipledispatch==0.6.0
+# nose==1.3.7
 numba==0.51.2
 numexpr==2.7.1
 numpy==1.19.5
@@ -76,7 +76,7 @@ pickleshare==0.7.5
 pkginfo==1.6.1
 pluggy==0.13.1
 ply==3.11
-pmdarima==1.8.2
+# pmdarima==1.8.2
 prometheus-client==0.8.0
 psycopg2==2.9.1 
 pycodestyle==2.6.0
@@ -108,13 +108,13 @@ snowballstemmer==2.0.0
 sortedcollections==1.2.1
 sortedcontainers==2.2.2
 soupsieve==2.0.1
-sphinxcontrib-applehelp==1.0.2
-sphinxcontrib-devhelp==1.0.2
-sphinxcontrib-htmlhelp==1.0.3
-sphinxcontrib-jsmath==1.0.1
-sphinxcontrib-qthelp==1.0.3
-sphinxcontrib-serializinghtml==1.1.4
-statsmodels==0.12.0
+# sphinxcontrib-applehelp==1.0.2
+# sphinxcontrib-devhelp==1.0.2
+# sphinxcontrib-htmlhelp==1.0.3
+# sphinxcontrib-jsmath==1.0.1
+# sphinxcontrib-qthelp==1.0.3
+# sphinxcontrib-serializinghtml==1.1.4
+# statsmodels==0.12.0
 tables==3.6.1
 terminado==0.9.1
 testpath==0.4.4
