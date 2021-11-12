@@ -100,7 +100,7 @@ python-dateutil==2.8.1
 # QtPy==1.9.0
 # Rtree==0.9.4
 # ruamel-yaml==0.15.87
-scikit-image==0.17.2
+# scikit-image==0.17.2
 # Send2Trash==1.5.0
 # simplegeneric==0.8.1
 # sip==4.19.13
