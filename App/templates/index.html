@@ -848,19 +848,19 @@
                     fetch('/reddit_pie_data', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
                         .then(resp => resp.json())
                         .then(data => { donutChart.update({series:[{data:[{y:data.count[0],name:'wallstreetbets'},{y:data.count[1],name:'CryptoCurrency'},{y:data.count[2],name:'SHIBArmy'}]}]}, true, false, false) });
-                    fetch('/reddit_total', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
+                    fetch('/reddit_total')
                         .then(resp => resp.json())
                         .then(html => { document.getElementById('earnings').innerHTML = html;});
                     fetch('/twitter_line_data', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
                         .then(resp => resp.json())
                         .then(data => {lineChartTwitter.update({ xAxis: { categories: data.halfhour}, series: [{ data: data.count}]})}, true, false, false);
-                    fetch('/twitter_total', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
+                    fetch('/twitter_total')
                         .then(resp => resp.json())
                         .then(html => {document.getElementById('tweets').innerHTML = html;});
                     fetch('/twitter_sentiment', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
                         .then(resp => resp.json())
                         .then(data => { barChartTwitter.update({ series: [{ data: data.count}]}, true, false, false)});
-                    fetch('/twitter_median_sentiment', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
+                    fetch('/twitter_median_sentiment')
                         .then(resp => resp.json())
                         .then(html => {document.getElementById('twitter-median').innerHTML = html;});
 
