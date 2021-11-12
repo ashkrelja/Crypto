@@ -75,7 +75,7 @@ class AWS_RDB():
 
         self.df = pd.DataFrame(self.data, columns = self.col_names)
 
-        self.jsond = self.df.tail(20).to_dict('list')
+        self.jsond = self.df.to_dict('list')
 
         self._db_cur.close()
 
@@ -118,4 +118,23 @@ class AWS_RDB():
         self._db_cur.close()
 
         return self.dict_obj
+
+    def twitter_total_query(self):
+
+        self.sql_file = open("App/functions/sql/twitter_total_sql.sql")
+
+        # self.sql_file = open("sql/twitter_median_sql.sql")
+
+        self.sql_as_string = self.sql_file.read()
+
+        self._db_cur.execute(self.sql_as_string)
+
+        self.data = self._db_cur.fetchone()
+
+        self.dict_obj = {'count': self.data[0]}
+
+        self._db_cur.close()
+
+        return self.dict_obj
+
 

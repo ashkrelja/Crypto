@@ -46,6 +46,8 @@ def twitter_line_data():
 
     db_data = db.twitter_query_half_data()
 
+    print(db_data)
+
     resp = make_response(db_data)
 
     resp.mimetype = 'application/json'
@@ -56,9 +58,9 @@ def twitter_total():
 
     db = AWS_RDB()
 
-    db_data = db.twitter_query_half_data()
+    db_data = db.twitter_total_query()
 
-    total = str(sum(db_data['count']))
+    total = db_data['count']
 
     resp = make_response(total)
 
@@ -101,3 +103,4 @@ def index():
 def maintenance():
 
     return render_template('maintenance.html')
+
