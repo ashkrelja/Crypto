@@ -851,7 +851,7 @@
                     fetch('/reddit_total')
                         .then(resp => resp.json())
                         .then(html => { document.getElementById('earnings').innerHTML = html;});
-                    fetch('/twitter_line_data')
+                    fetch('/twitter_line_data', {headers : { 'Content-Type': 'application/json','Accept': 'application/json'}})
                         .then(resp => resp.json())
                         .then(data => {lineChartTwitter.update({ xAxis: { categories: data.halfhour}, series: [{ data: data.count}]})}, true, false, false);
                     fetch('/twitter_total')
