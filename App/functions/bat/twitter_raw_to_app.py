@@ -23,7 +23,8 @@ class TwitterTables():
                                   FROM (SELECT COUNT(*), round_minutes((date_created::timestamp without time zone at time zone 'utc' at time zone 'est'), 30) AS HALFHOUR  
                                   FROM public.twitter_stream 
                                   GROUP BY 2
-                                  ORDER BY 2 ASC LIMIT 20) AS SQ1 """)
+                                  ORDER BY 2 DESC LIMIT 20) AS SQ1 
+                                  ORDER BY halfhour ASC""")
 
         self._db_connection.commit()
 
