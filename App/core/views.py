@@ -46,8 +46,6 @@ def twitter_line_data():
 
     db_data = db.twitter_query_half_data()
 
-    print(db_data)
-
     resp = make_response(db_data)
 
     resp.mimetype = 'application/json'
