@@ -81,7 +81,7 @@ prometheus-client==0.8.0
 psycopg2-binary==2.9.1 
 pycodestyle==2.6.0
 #pycosat==0.6.3
-pycosat
+#pycosat
 requests
 #pycurl==7.43.0.6
 # pyflakes==2.2.0
