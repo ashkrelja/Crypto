@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, render_template
+from flask import Blueprint, make_response, render_template, jsonify #added jsonify
 from App.functions.streamer import AWS_RDB
 
 
@@ -60,10 +60,11 @@ def twitter_total():
 
     total = db_data['count']
 
-    resp = make_response(total)
+    #resp = make_response(total)
 
-    resp.mimetype = 'application/json'
-    return resp
+    #resp.mimetype = 'application/json'
+    #return resp
+    return jsonify({"count":total})
 
 @core.route('/twitter_sentiment')
 def twitter_sentiment():
