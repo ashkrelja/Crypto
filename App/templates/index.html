@@ -856,7 +856,9 @@
                         .then(data => {lineChartTwitter.update({ xAxis: { categories: data.halfhour}, series: [{ data: data.count}]})}, true, false, false);
                     fetch('/twitter_total')
                         .then(resp => resp.json())
-                        .then(html => {document.getElementById('tweets').innerHTML = html;});
+                        .then(data => {
+                            document.getElementById('tweets').innerHTML = data.count;});
+                        // .then(html => {document.getElementById('tweets').innerHTML = html;});
                     fetch('/twitter_sentiment')
                         .then(resp => resp.json())
                         .then(data => { barChartTwitter.update({ series: [{ data: data.count}]}, true, false, false)});
