@@ -21,7 +21,7 @@ class Sentiment:
 
         self.df = df
 
-        self.df['tokens'] = self.df['text'].apply(lambda x: self._tokenizer.encode(x ,return_tensors = 'pt'))
+        self.df['tokens'] = self.df['body'].apply(lambda x: self._tokenizer.encode(x ,return_tensors = 'pt', max_length = 512, truncation = True))
 
         return self.df
 
@@ -52,7 +52,9 @@ class Sentiment:
 
         self.sent_df = df
 
-        self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x[:512]))
+        #self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x[:512]))
+
+        self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x))
 
         return self.sent_df
 
@@ -62,16 +64,16 @@ class Sentiment:
 
         rows = zip(self.df.id, self.df.sentiment)
 
-        self._db_cur.execute('DROP TABLE IF EXISTS twitter_feed')
+        self._db_cur.execute('DROP TABLE IF EXISTS reddit_feed')
 
-        self._db_cur.execute('CREATE TEMP TABLE twitter_feed(id TEXT, sentiment INT) ON COMMIT DROP')
+        self._db_cur.execute('CREATE TEMP TABLE reddit_feed(id TEXT, sentiment INT) ON COMMIT DROP')
 
-        self._db_cur.executemany('INSERT INTO twitter_feed (id, sentiment) VALUES(%s, %s)', rows) 
+        self._db_cur.executemany('INSERT INTO reddit_feed (id, sentiment) VALUES(%s, %s)', rows) 
 
-        self._db_cur.execute("""UPDATE public.twitter_stream 
-                                    SET sentiment = twitter_feed.sentiment
-                                    FROM twitter_feed
-                                    WHERE twitter_feed.id = twitter_stream.id  
+        self._db_cur.execute("""UPDATE public.reddit_stream 
+                                    SET sentiment = reddit_feed.sentiment
+                                    FROM reddit_feed
+                                    WHERE reddit_feed.id = reddit_stream.id  
                             """)
 
         self._db_connection.commit()
@@ -80,7 +82,9 @@ def main():
 
     main = Sentiment()
 
-    main_df = main.sentiment_query('SELECT id, text, sentiment FROM public.twitter_stream WHERE sentiment IS NULL LIMIT 1000')
+    #main_df = main.sentiment_query('SELECT id, body, sentiment FROM public.reddit_stream WHERE sentiment IS NULL LIMIT 1000')
+
+    main_df = main.sentiment_query('SELECT id, body FROM public.reddit_stream')
 
     main_df_tokens = main.pre_process(main_df)
 
