@@ -2,6 +2,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 import psycopg2
 import torch
+import torch.nn.functional as F
+from torch.nn.utils.rnn import pad_sequence
 
 
 class Sentiment:
@@ -17,14 +19,45 @@ class Sentiment:
         
         self._db_cur = self._db_connection.cursor()
 
+        self._ensure_sentiment_column() # Automatically check & create sentiment column
+
+
+    def _ensure_sentiment_column(self):
+        create_column_sql = """
+        DO $$
+        BEGIN
+            IF NOT EXISTS (
+                SELECT 1 FROM information_schema.columns
+                WHERE table_name='reddit_stream'
+                AND column_name='sentiment'
+            ) THEN
+                ALTER TABLE public.reddit_stream ADD COLUMN sentiment INT;
+            END IF;
+        END;
+        $$;
+        """
+        self._db_cur.execute(create_column_sql)
+        self._db_connection.commit()
+
+
+    # def pre_process(self, df):
+
+    #     self.df = df
+
+    #     self.df['tokens'] = self.df['body'].apply(lambda x: self._tokenizer.encode(x ,return_tensors = 'pt', max_length = 512, truncation = True))
+
+    #     return self.df
+
     def pre_process(self, df):
 
         self.df = df
 
-        self.df['tokens'] = self.df['body'].apply(lambda x: self._tokenizer.encode(x ,return_tensors = 'pt', max_length = 512, truncation = True))
-
+        self.df['tokens'] = self.df['body'].apply(
+            lambda x: torch.tensor(self._tokenizer.encode(
+                x , max_length = 512, truncation = True
+            ))
+        )
         return self.df
-
 
     def _sentiment_model(self, token):
 
@@ -48,15 +81,39 @@ class Sentiment:
 
         return self.df
 
-    def sentiment_score(self, df):
+    # def sentiment_score(self, df):
 
-        self.sent_df = df
+    #     self.sent_df = df
 
-        #self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x[:512]))
+    #     #self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x[:512]))
 
-        self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x))
+    #     self.sent_df['sentiment'] = self.sent_df['tokens'].apply(lambda x: self._sentiment_model(x))
 
-        return self.sent_df
+    #     return self.sent_df
+
+    def sentiment_score(self, df, batch_size=32):
+
+        tokens_list = df['tokens'].tolist()
+        all_sentiments = []
+
+        total = len(tokens_list)
+        for i in range(0, len(tokens_list), batch_size):
+
+            batch_tokens = tokens_list[i:i + batch_size]
+            
+            batch_padded = pad_sequence(batch_tokens, batch_first = True, padding_value = self._tokenizer.pad_token_id)
+
+            attention_mask = (batch_padded != self._tokenizer.pad_token_id).long()
+
+            with torch.no_grad():
+                outputs = self._model(batch_padded, attention_mask=attention_mask)
+                preds = torch.argmax(outputs.logits, dim=1) +1
+                all_sentiments.extend(preds.tolist())
+
+            print(f"Processed {min(i+batch_size, total)} / {total}")
+
+        df['sentiment'] = all_sentiments
+        return df
 
     def sentiment_updater(self,df):
 
@@ -88,7 +145,7 @@ def main():
 
     main_df_tokens = main.pre_process(main_df)
 
-    main_df_scores = main.sentiment_score(main_df_tokens)
+    main_df_scores = main.sentiment_score(main_df_tokens, batch_size = 32)
 
     main.sentiment_updater(main_df_scores)
 
