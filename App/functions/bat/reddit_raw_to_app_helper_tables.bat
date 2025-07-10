@@ -19,7 +19,7 @@ rem Using call is required here, see: https://stackoverflow.com/questions/246781
 call %CONDAPATH%\Scripts\activate.bat %ENVPATH%
 
 rem Run a python script in that environment
-python C:\Users\Administrator\Documents\twitter_raw_to_app.py
+python C:\Users\Administrator\Documents\reddit_raw_to_app_helper_tables.py
 
 rem Deactivate the environment
 call conda deactivate

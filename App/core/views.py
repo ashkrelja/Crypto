@@ -39,51 +39,78 @@ def reddit_total():
     resp.mimetype = 'application/json'
     return resp
 
-@core.route('/twitter_line_data')
-def twitter_line_data():
+# @core.route('/twitter_line_data')
+# def twitter_line_data():
+
+#     db = AWS_RDB()
+
+#     db_data = db.twitter_query_half_data()
+
+#     resp = make_response(db_data)
+
+#     resp.mimetype = 'application/json'
+#     return resp
+
+# @core.route('/twitter_total')
+# def twitter_total():
+
+#     db = AWS_RDB()
+
+#     db_data = db.twitter_total_query()
+
+#     total = db_data['count']
+
+#     #resp = make_response(total)
+
+#     #resp.mimetype = 'application/json'
+#     #return resp
+#     return jsonify({"count":total})
+
+# @core.route('/twitter_sentiment')
+# def twitter_sentiment():
+
+#     db = AWS_RDB()
+
+#     db_data = db.twitter_sentiment_query()
+
+#     resp = make_response(db_data)
+
+#     resp.mimetype = 'application/json'
+#     return resp
+
+@core.route('/reddit_sentiment')
+def reddit_sentiment():
 
     db = AWS_RDB()
 
-    db_data = db.twitter_query_half_data()
+    db_data = db.reddit_sentiment_query()
 
     resp = make_response(db_data)
 
     resp.mimetype = 'application/json'
     return resp
 
-@core.route('/twitter_total')
-def twitter_total():
+
+# @core.route('/twitter_median_sentiment')
+# def twitter_median_sentiment():
+
+#     db = AWS_RDB()
+
+#     db_data = db.twitter_median_query()
+
+#     data = str(db_data['median'])
+
+#     resp = make_response(data)
+
+#     resp.mimetype = 'application/json'
+#     return resp
+
+@core.route('/reddit_median_sentiment')
+def reddit_median_sentiment():
 
     db = AWS_RDB()
 
-    db_data = db.twitter_total_query()
-
-    total = db_data['count']
-
-    #resp = make_response(total)
-
-    #resp.mimetype = 'application/json'
-    #return resp
-    return jsonify({"count":total})
-
-@core.route('/twitter_sentiment')
-def twitter_sentiment():
-
-    db = AWS_RDB()
-
-    db_data = db.twitter_sentiment_query()
-
-    resp = make_response(db_data)
-
-    resp.mimetype = 'application/json'
-    return resp
-
-@core.route('/twitter_median_sentiment')
-def twitter_median_sentiment():
-
-    db = AWS_RDB()
-
-    db_data = db.twitter_median_query()
+    db_data = db.reddit_median_query()
 
     data = str(db_data['median'])
 

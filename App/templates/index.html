@@ -851,18 +851,24 @@
                     fetch('/reddit_total')
                         .then(resp => resp.json())
                         .then(html => { document.getElementById('earnings').innerHTML = html;});
-                    fetch('/twitter_line_data')
-                        .then(resp => resp.json())
-                        .then(data => {lineChartTwitter.update({ xAxis: { categories: data.halfhour}, series: [{ data: data.count}]})}, true, false, false);
-                    fetch('/twitter_total')
-                        .then(resp => resp.json())
-                        .then(data => {
-                            document.getElementById('tweets').innerHTML = data.count;});
+                    // fetch('/twitter_line_data')
+                    //     .then(resp => resp.json())
+                    //     .then(data => {lineChartTwitter.update({ xAxis: { categories: data.halfhour}, series: [{ data: data.count}]})}, true, false, false);
+                    // fetch('/twitter_total')
+                    //     .then(resp => resp.json())
+                    //     .then(data => {
+                    //         document.getElementById('tweets').innerHTML = data.count;});
                         // .then(html => {document.getElementById('tweets').innerHTML = html;});
-                    fetch('/twitter_sentiment')
+                    // fetch('/twitter_sentiment')
+                    //     .then(resp => resp.json())
+                    //     .then(data => { barChartTwitter.update({ series: [{ data: data.count}]}, true, false, false)});
+                    fetch('/reddit_sentiment')
                         .then(resp => resp.json())
                         .then(data => { barChartTwitter.update({ series: [{ data: data.count}]}, true, false, false)});
-                    fetch('/twitter_median_sentiment')
+                    // fetch('/twitter_median_sentiment')
+                    //     .then(resp => resp.json())
+                    //     .then(html => {document.getElementById('twitter-median').innerHTML = html;});
+                    fetch('/reddit_median_sentiment')
                         .then(resp => resp.json())
                         .then(html => {document.getElementById('twitter-median').innerHTML = html;});
 

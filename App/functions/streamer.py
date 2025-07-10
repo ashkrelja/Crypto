@@ -61,9 +61,49 @@ class AWS_RDB():
 
         return self.jsond
 
-    def twitter_query_half_data(self):
+    # def twitter_query_half_data(self):
 
-        self.sql_file = open("App/functions/sql/twitter_sql.sql")
+    #     self.sql_file = open("App/functions/sql/twitter_sql.sql")
+
+    #     self.sql_as_string = self.sql_file.read()
+
+    #     self._db_cur.execute(self.sql_as_string)
+
+    #     self.data = self._db_cur.fetchall()
+
+    #     self.col_names = [column[0] for column in self._db_cur.description]
+
+    #     self.df = pd.DataFrame(self.data, columns = self.col_names)
+
+    #     self.jsond = self.df.to_dict('list')
+
+    #     self._db_cur.close()
+
+    #     return self.jsond
+
+    # def twitter_sentiment_query(self):
+
+    #     self.sql_file = open("App/functions/sql/twitter_sentiment.sql")
+
+    #     self.sql_as_string = self.sql_file.read()
+
+    #     self._db_cur.execute(self.sql_as_string)
+
+    #     self.data = self._db_cur.fetchall()
+
+    #     self.col_names = [column[0] for column in self._db_cur.description]
+
+    #     self.df = pd.DataFrame(self.data, columns = self.col_names)
+
+    #     self.jsond = self.df.to_dict('list')
+
+    #     self._db_cur.close()
+
+    #     return self.jsond
+
+    def reddit_sentiment_query(self):
+
+        self.sql_file = open("App/functions/sql/reddit_sentiment.sql")
 
         self.sql_as_string = self.sql_file.read()
 
@@ -81,29 +121,9 @@ class AWS_RDB():
 
         return self.jsond
 
-    def twitter_sentiment_query(self):
+    def reddit_median_query(self):
 
-        self.sql_file = open("App/functions/sql/twitter_sentiment.sql")
-
-        self.sql_as_string = self.sql_file.read()
-
-        self._db_cur.execute(self.sql_as_string)
-
-        self.data = self._db_cur.fetchall()
-
-        self.col_names = [column[0] for column in self._db_cur.description]
-
-        self.df = pd.DataFrame(self.data, columns = self.col_names)
-
-        self.jsond = self.df.to_dict('list')
-
-        self._db_cur.close()
-
-        return self.jsond
-
-    def twitter_median_query(self):
-
-        self.sql_file = open("App/functions/sql/twitter_median_sql.sql")
+        self.sql_file = open("App/functions/sql/reddit_median_sql.sql")
 
         # self.sql_file = open("sql/twitter_median_sql.sql")
 
@@ -119,22 +139,22 @@ class AWS_RDB():
 
         return self.dict_obj
 
-    def twitter_total_query(self):
+    # def twitter_total_query(self):
 
-        self.sql_file = open("App/functions/sql/twitter_total_sql.sql")
+    #     self.sql_file = open("App/functions/sql/twitter_total_sql.sql")
 
-        # self.sql_file = open("sql/twitter_median_sql.sql")
+    #     # self.sql_file = open("sql/twitter_median_sql.sql")
 
-        self.sql_as_string = self.sql_file.read()
+    #     self.sql_as_string = self.sql_file.read()
 
-        self._db_cur.execute(self.sql_as_string)
+    #     self._db_cur.execute(self.sql_as_string)
 
-        self.data = self._db_cur.fetchone()
+    #     self.data = self._db_cur.fetchone()
 
-        self.dict_obj = {'count': self.data[0]}
+    #     self.dict_obj = {'count': self.data[0]}
 
-        self._db_cur.close()
+    #     self._db_cur.close()
 
-        return self.dict_obj
+    #     return self.dict_obj
 
 
