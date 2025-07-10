@@ -576,16 +576,16 @@
                                     </div>
                                 </div> -->
                                 <!-- Card Body -->
-                                <div id = "card-bodyid" class="card-body">
+                                <!-- <div id = "card-bodyid" class="card-body"> -->
                                     <!-- <div id = 'data-container' class = 'container-fluid' ></div> -->
-                                    <div id = "chart-areaidtwitter"  class="chart-area">
+                                    <!-- <div id = "chart-areaidtwitter"  class="chart-area"> -->
                                         <!-- <meta http-equiv="refresh" content="5"> -->
-                                        <div id = 'data-container' class = 'container-fluid'></div>
+                                        <!-- <div id = 'data-container' class = 'container-fluid'></div> -->
                                         <!-- <canvas id="myAreaChart"></canvas> -->
-                                    </div>
+                                    <!-- </div>
                                 </div>
                                 </div>
-                            </div> 
+                            </div>  -->
 
                         <!-- Pie Chart -->
                         <!-- <div class="col-xl-4 col-lg-5"> -->
@@ -765,31 +765,31 @@
 
             const donutChart = Highcharts.chart('pie-container', donutChartOptions)
 
-            lineChartOptions = {
-                chart: { renderTo: 'chart-areaidtwitter',
-                defaultSeriesType: 'spline'
-                }, 
-                title: {
-                    text: ''
-                },
-                xAxis: { type: 'datetime',
-                        categories: []
+            // lineChartOptions = {
+            //     chart: { renderTo: 'chart-areaidtwitter',
+            //     defaultSeriesType: 'spline'
+            //     }, 
+            //     title: {
+            //         text: ''
+            //     },
+            //     xAxis: { type: 'datetime',
+            //             categories: []
 
-                },
-                yAxis: {
-                minPadding: 0.2,
-                maxPadding: 0.2,
-                title: {text: 'Value',
-                        margin: 80}
-                },
-                series: [{
-                    name: 'Number of Tweets',
-                    animation: false,
-                    data: []
-                    }]
-                }
+            //     },
+            //     yAxis: {
+            //     minPadding: 0.2,
+            //     maxPadding: 0.2,
+            //     title: {text: 'Value',
+            //             margin: 80}
+            //     },
+            //     series: [{
+            //         name: 'Number of Tweets',
+            //         animation: false,
+            //         data: []
+            //         }]
+            //     }
 
-            const lineChartTwitter = Highcharts.chart('chart-areaidtwitter', lineChartOptions)
+            // const lineChartTwitter = Highcharts.chart('chart-areaidtwitter', lineChartOptions)
 
             barChartOptions = {
                 chart: {
